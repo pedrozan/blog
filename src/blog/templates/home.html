@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
 {% block logged_in_nav %}
-{% if not has_blog %}
-<li><a href="{% url "new-blog" %}">Create New Blog</a></li>
-{% else %}
-<li><a href="{% url "update-blog" pk=blog.pk %}">Edit Blog Settings</a></li>
-{% endif %}
+  {% if not has_blog %}
+    <li><a href="{% url "new-blog" %}">Create New Blog</a></li>
+  {% else %}
+    <li><a href="{% url "update-blog" pk=blog.pk %}">Edit Blog Settings</a></li>
+    <li><a href="{% url "new-blog-post" %}">Create New Blog Post</a></li>
+  {% endif %}
 {% endblock %}
