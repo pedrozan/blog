@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.http.response import HttpResponseRedirect, HttpResponseForbidden
 from django.utils.text import slugify
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 
@@ -18,6 +18,7 @@ class HomeView(TemplateView):
 
         if self.request.user.is_authenticated:
             ctx['has_blog'] = Blog.objects.filter(owner=self.request.user).exists()
+            ctx['blog'] = Blog.objects.get(owner=self.request.user)
 
         return ctx
 
@@ -41,3 +42,14 @@ class NewBlogView(CreateView):
             return HttpResponseForbidden('You can not create more than one blog per account')
         else:
             return super(NewBlogView, self).dispatch(request, *args, **kwargs)
+
+
+class UpdateBlogView(UpdateView):
+    form_class = BlogForm
+    template_name = 'blog_settings.html'
+    success_url = '/'
+    model = Blog
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(UpdateBlogView, self).dispatch(request, *args, **kwargs)
