@@ -4,9 +4,22 @@ from django.utils.text import slugify
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
 
 from blog.forms import BlogForm
 from blog.models import Blog
+
+
+class HomeView(TemplateView):
+    template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(HomeView, self).get_context_data(**kwargs)
+
+        if self.request.user.is_authenticated:
+            ctx['has_blog'] = Blog.objects.filter(owner=self.request.user).exists()
+
+        return ctx
 
 
 class NewBlogView(CreateView):
