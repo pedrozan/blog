@@ -76,3 +76,14 @@ class NewBlogPostView(CreateView):
         blog_post_obj.save()
 
         return HttpResponseRedirect(reverse('home'))
+
+
+class UpdateBlogPostView(UpdateView):
+    form_class = BlogPostForm
+    template_name = 'blog_post.html'
+    success_url = '/'
+    model = BlogPost
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(UpdateBlogPostView, self).dispatch(request, *args, **kwargs)
