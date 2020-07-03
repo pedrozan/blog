@@ -88,6 +88,10 @@ class UpdateBlogPostView(UpdateView):
     def dispatch(self, request, *args, **kwargs):
         return super(UpdateBlogPostView, self).dispatch(request, *args, **kwargs)
 
+    def get_queryset(self):
+        queryset = super(UpdateBlogPostView, self).get_queryset()
+        return queryset.filter(blog__owner=self.request.user)
+
 
 class BlogPostDetailsView(DetailView):
     model = BlogPost
