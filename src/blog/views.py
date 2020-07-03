@@ -17,8 +17,12 @@ class HomeView(TemplateView):
         ctx = super(HomeView, self).get_context_data(**kwargs)
 
         if self.request.user.is_authenticated:
-            ctx['has_blog'] = Blog.objects.filter(owner=self.request.user).exists()
-            ctx['blog'] = Blog.objects.get(owner=self.request.user)
+            if Blog.objects.filter(owner=self.request.user).exists():
+                ctx['has_blog'] = True
+                blog = Blog.objects.get(owner=self.request.user)
+
+                ctx['blog'] = blog
+                ctx['blog_posts'] = BlogPost.objects.filter(blog=blog)
 
         return ctx
 
