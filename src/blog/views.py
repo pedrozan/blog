@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.http.response import HttpResponseRedirect, HttpResponseForbidden
 from django.utils.text import slugify
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DetailView
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 
@@ -87,3 +87,8 @@ class UpdateBlogPostView(UpdateView):
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(UpdateBlogPostView, self).dispatch(request, *args, **kwargs)
+
+
+class BlogPostDetailsView(DetailView):
+    model = BlogPost
+    template_name = 'blog_post_details.html'
