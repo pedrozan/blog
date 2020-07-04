@@ -1,0 +1,37 @@
+/* line 1, static/scss/base.scss */
+body {
+  background: #999999; }
+
+/* line 2, static/scss/base.scss */
+.container {
+  width: 80%;
+  margin: auto;
+  top: 50px;
+  position: relative; }
+
+/* line 9, static/scss/base.scss */
+.flexnav,
+.menu-button {
+  font-family: Lato, Helvetica, sans-serif;
+  line-height: 1;
+  background: #2b2f3a; }
+
+/* line 16, static/scss/base.scss */
+.flexnav {
+  padding: 0;
+  display: block;
+  overflow: visible;
+  width: 100%; }
+
+/* line 23, static/scss/base.scss */
+.flexnav > li > a,
+.menu-button {
+  padding: 18px 22px;
+  font-size: 18px;
+  text-transform: uppercase; }
+
+/* line 30, static/scss/base.scss */
+.flexnav:after {
+  content: "";
+  display: table;
+  clear: both; }

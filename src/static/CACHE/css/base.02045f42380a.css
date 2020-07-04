@@ -1,0 +1,10 @@
+/* line 1, static/scss/base.scss */
+body {
+  background: #999999; }
+
+/* line 2, static/scss/base.scss */
+.container {
+  width: 80%;
+  margin: auto;
+  top: 50px;
+  position: relative; }
